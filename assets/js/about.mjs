@@ -33,6 +33,6 @@ export function aboutPage(config){
    </ol>
    ${external(config.docsUrl,'Explore the documentation','text-link about-docs')}
   </section>
-  <section class="about-community" aria-labelledby="about-community-title"><span class="eyebrow">The next chapter is yours</span><h2 id="about-community-title">Build something<br>your community remembers.</h2><p>Bring the vision. Explore what BluePeak can add to it.<br>And if you have a question before your next upgrade, start a conversation.</p><div class="action-group">${external(config.discordUrl,'Join our Discord')}<a class="button secondary" href="#/resources">Discover the collection ${icons.arrow}</a></div><a class="about-support-link" href="#/support">Prefer email? Find all support options ${icons.arrow}</a></section>
+  <section class="about-community" aria-labelledby="about-community-title"><span class="eyebrow">The next chapter is yours</span><h2 id="about-community-title">Build something<br>your community remembers.</h2><p>Bring the vision. Explore what BluePeak can add to it.<br>And if you have a question before your next upgrade, start a conversation.</p><div class="action-group">${external(config.discordUrl,'Join our Discord','button')}<a class="button secondary" href="#/resources">Discover the collection ${icons.arrow}</a></div><a class="about-support-link" href="#/support">Prefer email? Find all support options ${icons.arrow}</a></section>
  </div>`;
 }
