@@ -1,4 +1,4 @@
-import {supportPage} from './support.mjs';
+import {supportPage} from './support.mjs?v=20261022-response-times';
 import {checkoutReturnState} from './checkout-return.mjs';
 import {faqPage,filterFAQ} from './faq.mjs';
 import {aboutPage} from './about.mjs';
