@@ -122,3 +122,7 @@ Use **Copy share link** on a product page when posting to Discord or other socia
 The Pages workflow generates previews from the public Tebex catalog on every push, manual run, and approximately every 30 minutes (GitHub scheduled runs can be delayed). Newly added, updated, moved, removed and disabled products are reflected automatically; IDs keep share URLs stable when categories change. Storefront catalog refresh remains approximately 60 seconds. Social platforms cache previews independently.
 
 Run node scripts/sync-previews.mjs to refresh local static product pages. It fails before modifying pages if catalog retrieval fails, preventing an outage from deleting the previews. The workflow stops deployment on that failure, preserving the last successful site. No private API credentials or customer basket data are used. GitHub Pages publishing source is GitHub Actions; the workflow stages only public website files, then deploys with the official Pages actions.
+
+## Checkout return routing
+
+New baskets use ?bluepeak_checkout=complete and ?bluepeak_checkout=cancel return URLs. Existing #/checkout/complete and #/checkout/cancel callbacks still work, including Tebex-appended ?txn-id parameters. The route is normalized before rendering so provider parameters cannot turn it into a 404. Returning selects the thank-you or cancellation screen only; payment confirmation remains with Tebex. Callback parameters are removed from the address after routing and are never used as payment verification.

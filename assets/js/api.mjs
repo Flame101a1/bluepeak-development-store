@@ -1,3 +1,4 @@
+import {checkoutReturnURL} from './checkout-return.mjs';
 import {authReturnURL} from './auth.mjs';
 import {API,unwrap,readBasket,basketPath,packagePath} from './core.mjs';
 export class ApiError extends Error {
@@ -34,7 +35,7 @@ export class TebexAPI {
  }
  async ensureBasket(){
   if(this.pending)return this.pending;
-  const create=async()=>{const existing=await this.basket();if(existing)return existing;const basket=readBasket(await this.request(this.account+'/baskets','POST',{complete_url:this.baseUrl+'#/checkout/complete',cancel_url:this.baseUrl+'#/checkout/cancel',complete_auto_redirect:true}));this.remember(basket.ident);return basket};
+  const create=async()=>{const existing=await this.basket();if(existing)return existing;const basket=readBasket(await this.request(this.account+'/baskets','POST',{complete_url:checkoutReturnURL(this.baseUrl||globalThis.location?.href||'http://localhost/','complete'),cancel_url:checkoutReturnURL(this.baseUrl||globalThis.location?.href||'http://localhost/','cancel'),complete_auto_redirect:true}));this.remember(basket.ident);return basket};
   this.pending=globalThis.navigator?.locks?.request?globalThis.navigator.locks.request('bluepeak:create:'+this.token,create):create();
   try{return await this.pending}finally{this.pending=null}
  }
