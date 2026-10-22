@@ -302,3 +302,26 @@ body{background-image:radial-gradient(ellipse at 80% 10%,#073b642e,transparent 3
 @media(max-width:1000px){.support-channel{padding:27px}.support-channel h2{font-size:24px}.support-preparation{gap:38px}.support-payment{flex-wrap:wrap}.support-payment>div{flex-basis:70%}.support-payment>.button{margin-left:79px}.support-self-service{gap:30px}}
 @media(max-width:700px){.support-channels,.support-preparation,.support-self-service{grid-template-columns:1fr}.support-channels{gap:18px}.support-breadcrumbs{padding:24px 0}.support-hero{padding:8px 0 30px}.support-hero h1{font-size:clamp(34px,7vw,46px)}.support-hero>p{font-size:14px}.support-hero>p br{display:none}.support-channel{padding:26px}.support-card-top{margin-bottom:24px}.support-channel>p{font-size:13px}.support-preparation{padding:42px 0;gap:28px}.support-preparation-intro>p,.support-privacy-note{max-width:100%}.support-preparation h2 br{display:none}.support-payment{padding:25px;gap:18px}.support-payment-icon{width:44px;height:44px;border-radius:10px}.support-payment>div{flex-basis:calc(100% - 62px)}.support-payment h2{font-size:21px}.support-payment>.button{margin:6px 0 0;width:100%}.support-self-service{padding:38px 0 30px;gap:22px}.support-self-service h2{font-size:25px}.support-response-note{font-size:10px}.support-page{padding-bottom:44px}}
 @media(max-width:390px){.support-channel{padding:22px}.support-channel h2{font-size:23px}.support-preferred{font-size:9px;padding:5px 8px}.support-card-top{gap:10px}.support-card-footer{width:100%}.support-card-footer>.button{width:100%}.support-channel-label{max-width:135px}.support-payment>div{flex-basis:100%}.support-payment h2{font-size:21px}}
+
+.discord-rewards{background:linear-gradient(135deg,#10283c,#0b192a);border:1px solid #28506d;border-radius:12px;padding:20px;margin:22px 0}
+.discord-rewards-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.discord-rewards-heading .value-icon{margin:0;width:38px;height:38px;border-radius:10px}
+.discord-rewards h3{font-size:16px;margin:0 0 3px}
+.discord-rewards-heading>div>span{font-size:10px;color:var(--ice)}
+.discord-rewards>p,.discord-id-guide p{font-size:12px;line-height:1.85;margin-bottom:14px}
+.discord-rewards>label{display:block;font-size:11px;font-weight:600;color:var(--text);margin-bottom:7px}
+.discord-rewards input{display:block;width:100%;min-width:0;padding:12px;border:1px solid #355876;border-radius:7px;background:#081421;color:var(--text);font-size:13px}
+.discord-rewards input::placeholder{color:var(--muted);opacity:1}
+.discord-rewards .discord-field-help{font-size:10px;margin:9px 0 12px}
+.discord-id-guide{border-top:1px solid #24415a;padding-top:12px;margin-top:12px}
+.discord-id-guide summary{cursor:pointer;color:var(--ice);font-size:11px;font-weight:500}
+.discord-id-guide p{margin:12px 0 0}
+.discord-rewards>.text-link{margin-top:14px;font-size:11px}
+.package-options-dialog{width:min(520px,calc(100% - 32px));max-height:90vh;overflow:auto}
+.package-options-dialog h2{font-size:22px}
+.package-options-dialog .discord-rewards{margin:18px 0}
+.package-options-name{font-size:12px;margin:0}
+.package-options-dialog form>.button{width:100%}
+.purchase-options-note{font-size:12px;border-left:2px solid #2c668c;padding:12px 16px;margin:20px 0}
+.purchase-options-note p{font-size:12px;margin:8px 0 0}
+@media(max-width:420px){.discord-rewards{padding:16px}.discord-rewards h3{font-size:15px}.package-options-dialog h2{font-size:18px}}

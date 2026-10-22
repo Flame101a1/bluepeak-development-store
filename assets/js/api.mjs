@@ -1,3 +1,4 @@
+import {validateVariableData} from './package-options.mjs';
 import {checkoutReturnURL} from './checkout-return.mjs';
 import {authReturnURL} from './auth.mjs';
 import {API,unwrap,readBasket,basketPath,packagePath} from './core.mjs';
@@ -41,17 +42,18 @@ export class TebexAPI {
  }
  serialize(fn){const task=this.queue.then(fn);this.queue=task.catch(()=>{});return task}
  async auth(basket){const links=await this.request(basketPath(this.token,basket.ident)+'/auth?returnUrl='+encodeURIComponent(authReturnURL(this.baseUrl||globalThis.location?.href||'http://localhost/')));if(!Array.isArray(links))throw new ApiError('Sign-in options are temporarily unavailable.');return links.filter(link=>typeof link.name==='string'&&typeof link.url==='string')}
- mutate(action,{id,quantity=1,code='',dynamic=false}={}){
+ mutate(action,{id,quantity=1,code='',dynamic=false,variableData}={}){
   return this.serialize(async()=>{
    const packageAction=['add','remove','quantity'].includes(action);
    if(packageAction&&(!['string','number'].includes(typeof id)||!String(id)||String(id).length>512))throw new ApiError('Choose a valid package.');
    if(['add','quantity'].includes(action)&&(!Number.isInteger(quantity)||quantity<1||quantity>99))throw new ApiError('Choose a quantity between 1 and 99.');
    const names={coupon:['coupons','coupon_code'],giftcard:['giftcards','card_number'],creator:['creator-codes','creator_code']};const remove=action.startsWith('remove-'),kind=action.replace('remove-','');
    if(!packageAction&&(!names[kind]||typeof code!=='string'||!code.trim()||code.length>128))throw new ApiError('Enter a valid supported code.');
+   const variables=action==='add'?validateVariableData(variableData):{};
    const basket=['remove','quantity'].includes(action)||remove?await this.basket():await this.ensureBasket();
    if(!basket)throw new ApiError('Your basket expired. Add a resource to start a new basket.',410);
    const path=basketPath(this.token,basket.ident),pkg=packagePath(basket.ident);let url,method='POST',body;
-   if(action==='add'){url=pkg;body={package_id:String(id),quantity,...(dynamic?{dynamic:true}:{})}}
+   if(action==='add'){url=pkg;body={package_id:String(id),quantity,...(dynamic?{dynamic:true}:{}),...(Object.keys(variables).length?{variable_data:variables}:{})}}
    else if(action==='remove'){url=pkg+'/remove';body={package_id:String(id)}}
    else if(action==='quantity'){url=pkg+'/'+encodeURIComponent(id);method='PUT';body={quantity}}
    else{const [segment,field]=names[kind];url=path+'/'+segment+(remove?'/remove':'');body={[field]:code.trim()}}

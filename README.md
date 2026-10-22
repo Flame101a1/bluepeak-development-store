@@ -126,3 +126,11 @@ Run node scripts/sync-previews.mjs to refresh local static product pages. It fai
 ## Checkout return routing
 
 New baskets use ?bluepeak_checkout=complete and ?bluepeak_checkout=cancel return URLs. Existing #/checkout/complete and #/checkout/cancel callbacks still work, including Tebex-appended ?txn-id parameters. The route is normalized before rendering so provider parameters cannot turn it into a 404. Returning selects the thank-you or cancellation screen only; payment confirmation remains with Tebex. Callback parameters are removed from the address after routing and are never used as payment verification.
+
+## Discord role rewards
+
+Product options are read from Tebex rather than displayed as raw JSON. A discord_id option adds an optional or required Discord user ID field based on the live required flag. The ID is kept as text to avoid numeric rounding and sent in variable_data.discord_id when adding the package, as documented by Tebex. Product Add to basket, Buy now, and resource-card adds all collect the value; card adds use an in-page dialog. IDs are not stored separately in browser storage.
+
+This is Discord recipient identification, not an OAuth sign-in or proof of account ownership. The store currently returns only FiveM from the official basket authentication endpoint. Buyers must enter their own Discord ID and join the linked server. Role delivery remains with the configured Tebex Discord actions after successful payment. Confirm the bot can manage the target roles and perform a controlled delivery test in Tebex; no real purchase or role assignment was performed during storefront testing.
+
+Official references: https://docs.tebex.io/developers/headless-api/guides/baskets/add-package-to-basket/variable-data.md and https://docs.tebex.io/creators/tebex-control-panel/discord-bot

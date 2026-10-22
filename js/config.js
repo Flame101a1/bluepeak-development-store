@@ -1,4 +1,4 @@
-import {policies} from './policies.js?v=20261022-policies';
+import {policies} from './policies.js?v=20261022-discord-rewards';
 // This file is PUBLIC. Only the Tebex HEADLESS PUBLIC token belongs here.
 // Never paste a Checkout API key, webhook secret, password, or other private credential.
 export const config = {
