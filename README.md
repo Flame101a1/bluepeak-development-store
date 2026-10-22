@@ -110,3 +110,7 @@ The release pass verified 36 automated tests and 30 browser checks. Full details
 ## Store policies
 
 Terms, refunds and privacy pages use the dated policy wording in js/policies.js. The terms prohibit leaking, redistribution, resale and ban evasion, with a permanent BluePeak future-purchase ban after evidence review and an email appeal route. Statutory consumer rights and Tebex checkout terms remain applicable. Publishing a policy does not automatically enforce a customer ban: apply actual restrictions using the supported Tebex and platform controls. Have the wording reviewed for the business and applicable jurisdiction, and keep it consistent with the store terms shown in Tebex checkout.
+
+## Cfx.re sign-in behavior
+
+Choose Customer login and an official provider returned by Tebex. Authentication opens in a separate window from that click; the main storefront keeps its current route. The callback uses a query flag rather than a fragment so provider-added parameters cannot break routing. The sign-in window signals the main page and closes where supported. The main page confirms the account by retrieving the basket from Tebex; callback parameters and messages are never treated as proof of identity. Popup-close and focus checks handle providers that sever the opener connection. Blocked popups show instructions without navigating the storefront. Legacy #/auth/return links restore a saved local storefront route or the homepage.

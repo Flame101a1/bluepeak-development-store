@@ -1,3 +1,4 @@
+import {authReturnURL} from './auth.mjs';
 import {API,unwrap,readBasket,basketPath,packagePath} from './core.mjs';
 export class ApiError extends Error {
  constructor(message,status=0,retryAt=0){super(message);this.name='ApiError';this.status=status;this.retryAt=retryAt}
@@ -38,7 +39,7 @@ export class TebexAPI {
   try{return await this.pending}finally{this.pending=null}
  }
  serialize(fn){const task=this.queue.then(fn);this.queue=task.catch(()=>{});return task}
- async auth(basket){const links=await this.request(basketPath(this.token,basket.ident)+'/auth?returnUrl='+encodeURIComponent(this.baseUrl+'#/auth/return'));if(!Array.isArray(links))throw new ApiError('Sign-in options are temporarily unavailable.');return links.filter(link=>typeof link.name==='string'&&typeof link.url==='string')}
+ async auth(basket){const links=await this.request(basketPath(this.token,basket.ident)+'/auth?returnUrl='+encodeURIComponent(authReturnURL(this.baseUrl||globalThis.location?.href||'http://localhost/')));if(!Array.isArray(links))throw new ApiError('Sign-in options are temporarily unavailable.');return links.filter(link=>typeof link.name==='string'&&typeof link.url==='string')}
  mutate(action,{id,quantity=1,code='',dynamic=false}={}){
   return this.serialize(async()=>{
    const packageAction=['add','remove','quantity'].includes(action);
