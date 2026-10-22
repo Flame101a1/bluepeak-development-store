@@ -2,3 +2,5 @@
 Thumbs.db
 *.log
 release/
+
+_site/

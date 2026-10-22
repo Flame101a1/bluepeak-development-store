@@ -134,3 +134,5 @@ body{background-image:radial-gradient(ellipse at 80% 10%,#073b642e,transparent 3
 .policy-text .policy-source{color:var(--ice);text-decoration:underline;overflow-wrap:anywhere}
 .policy-source svg{display:none}
 .policy-contact{border-top:1px solid var(--line);padding-top:26px;margin-top:34px}
+
+.resource-share{margin-left:24px}.share-link-field{display:block;width:100%;margin-top:12px;padding:10px;color:#fff;background:#0b1828;border:1px solid #00bfff;border-radius:6px}@media(max-width:480px){.resource-share{margin-left:18px}}

@@ -114,3 +114,11 @@ Terms, refunds and privacy pages use the dated policy wording in js/policies.js.
 ## Cfx.re sign-in behavior
 
 Customer login opens the account dialog within the storefront. Selecting the official FiveM provider follows the Tebex-provided sign-in URL in the same tab. The current storefront route and scroll position are saved in session storage. After Cfx.re authentication, the callback confirms the basket identity with Tebex, restores that route, and shows a brief connection message. No popup, new tab, or separate account-status page is used. The callback uses a query flag to tolerate provider-added parameters; legacy #/auth/return links are also supported. URL parameters are never treated as proof of authentication.
+
+## Link previews and sharing
+
+Use **Copy share link** on a product page when posting to Discord or other social sites. It copies /products/{package-id}/, a static page containing the live product title, description and artwork as Open Graph and Twitter metadata. People opening it continue to the normal storefront product page in the same tab. Existing #/product/... links continue working, but their fragment is invisible to preview crawlers and they show the general store banner.
+
+The Pages workflow generates previews from the public Tebex catalog on every push, manual run, and approximately every 30 minutes (GitHub scheduled runs can be delayed). Newly added, updated, moved, removed and disabled products are reflected automatically; IDs keep share URLs stable when categories change. Storefront catalog refresh remains approximately 60 seconds. Social platforms cache previews independently.
+
+Run node scripts/sync-previews.mjs to refresh local static product pages. It fails before modifying pages if catalog retrieval fails, preventing an outage from deleting the previews. The workflow stops deployment on that failure, preserving the last successful site. No private API credentials or customer basket data are used. GitHub Pages publishing source is GitHub Actions; the workflow stages only public website files, then deploys with the official Pages actions.
