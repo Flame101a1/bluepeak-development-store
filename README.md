@@ -18,7 +18,7 @@ Open http://127.0.0.1:8080. A recent Node.js (22+) is sufficient; no dependencie
 
 ## Store settings
 
-Edit js/config.js. This is the single source for the public Tebex token, branding paths, Discord, documentation, optional YouTube/support links, refresh interval, homepage section order, theme colors and approved policy copy. Root config.js is a compatibility import only.
+Edit js/config.js (policy wording is imported from js/policies.js). This is the single source for the public Tebex token, branding paths, Discord, documentation, optional YouTube/support links, refresh interval, homepage section order, theme colors and approved policy copy. Root config.js is a compatibility import only.
 
 The configured token is a Headless PUBLIC webstore token and is intentionally readable in the website source. Never put a private Checkout API key, webhook secret, password or payment information in browser files. There is no .env file for this site.
 
@@ -106,3 +106,7 @@ The release pass verified 36 automated tests and 30 browser checks. Full details
 - https://docs.tebex.io/developers/tebex.js/checkout/events
 - https://docs.tebex.io/creators/tebex-control-panel/settings/checkout/regional-pricing
 - https://frankfurter.dev/
+
+## Store policies
+
+Terms, refunds and privacy pages use the dated policy wording in js/policies.js. The terms prohibit leaking, redistribution, resale and ban evasion, with a permanent BluePeak future-purchase ban after evidence review and an email appeal route. Statutory consumer rights and Tebex checkout terms remain applicable. Publishing a policy does not automatically enforce a customer ban: apply actual restrictions using the supported Tebex and platform controls. Have the wording reviewed for the business and applicable jurisdiction, and keep it consistent with the store terms shown in Tebex checkout.

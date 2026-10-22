@@ -1,3 +1,4 @@
+import {policies} from './policies.js?v=20261022-policies';
 // This file is PUBLIC. Only the Tebex HEADLESS PUBLIC token belongs here.
 // Never paste a Checkout API key, webhook secret, password, or other private credential.
 export const config = {
@@ -15,7 +16,7 @@ export const config = {
  cacheSeconds: 60,
  // Reorder or remove these homepage sections.
  sections: ['latest', 'categories', 'values', 'community'],
- // Paste owner-approved policy copy as plain text. Blank policies show an honest setup notice.
- policies: { terms: '', refunds: '', privacy: '' },
+ // Policy wording lives in js/policies.js; blank values show a setup notice.
+ policies,
  accent: '#00BFFF', secondary: '#A8DFFF'
 };
