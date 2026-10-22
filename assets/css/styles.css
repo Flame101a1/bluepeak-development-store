@@ -89,3 +89,22 @@ body{min-width:0}
 /* Quiet mountain contours add depth behind the existing storefront. */
 body{background-image:radial-gradient(ellipse at 80% 10%,#073b642e,transparent 35%),radial-gradient(ellipse at 0 55%,#08386b22,transparent 40%),url('../brand/bluepeak-contours.svg?v=2');background-color:var(--bg);background-size:auto,auto,1440px 1080px;background-position:center top,center top,center top;background-repeat:no-repeat,no-repeat,repeat}
 @media(max-width:600px){body{background-size:auto,auto,960px 720px}}
+
+/* Live Tebex category hierarchy. */
+.nav .category-tree{list-style:none;margin:0;padding:0}
+.nav .category-tree>li{margin:0}
+.nav .category-tree a{white-space:normal;overflow-wrap:anywhere}
+.nav .category-tree .category-branch{position:static;margin:0}
+.nav .category-tree .category-branch>summary{display:flex;justify-content:space-between;min-height:42px;padding:11px 12px;line-height:1.5;font-size:11px;color:var(--ice);white-space:normal;border-radius:5px}
+.nav .category-tree .category-branch>summary:after{content:'+';position:static;margin-left:12px;transform:none;width:auto;height:auto;border:0;background:none;color:var(--accent)}
+.nav .category-tree .category-branch[open]>summary:after{content:'−'}
+.nav .category-tree .category-branch>summary:hover{background:#00bfff0c}
+.nav .category-children{margin:0 0 7px 12px;border-left:1px solid #28445f;padding-left:5px}
+.nav .category-children>a{color:var(--accent)}
+.nav .dropdown{width:300px;max-width:calc(100vw - 32px);overscroll-behavior:contain}
+.category-tile span small{display:block;margin-top:8px;font:500 10px/1.5 Inter,Arial,sans-serif;letter-spacing:.02em;color:var(--muted)}
+.subcategory-section{margin-bottom:32px}
+.subcategory-section h2{font-size:19px}
+.subcategory-section .category-tile{min-height:105px;padding:20px}
+.subcategory-section .category-tile span{font-size:13px}
+@media(max-width:900px){.nav.open .category-tree .category-branch{display:block;padding:0}.nav .dropdown{width:100%;max-width:100%}}

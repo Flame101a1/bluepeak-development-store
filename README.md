@@ -6,7 +6,7 @@ A standalone HTML, CSS and JavaScript storefront for GitHub Pages. The existing 
 
 The working folder is the website source. Serve or publish index.html directly from this folder, alongside assets/, js/, config.js, 404.html, robots.txt and .nojekyll. No ZIP, staging step or build is needed.
 
-The site files are prepared for upload. Before opening sales, complete the pending items in RELEASE_READINESS.md. The website has not been deployed from this workspace.
+The site files are prepared for upload. Before opening sales, complete the pending items in RELEASE_READINESS.md. The site is published from the main branch of Flame101a1/bluepeak-development-store. The custom domain is bluepeakdevelopment.store.
 
 ## Preview locally
 
@@ -31,7 +31,7 @@ Missing optional links are hidden. Discord is configured as the available suppor
 
 ## Automatic product updates
 
-Latest Resources, categories, navigation and product details use the real Tebex catalog. The manual Featured Resources section and its product-ID list have been removed. Nothing needs to be edited on the website when a product is created, renamed, repriced or removed in Tebex.
+Latest Resources, categories, navigation and product details use the real Tebex catalog. The category menu builds expandable parent/child groups from Tebex parent IDs. The homepage shows main categories; their pages display subcategories and include all descendant products. The category filter uses the same hierarchy. Adding, removing, reordering, renaming or moving categories and packages in Tebex updates these views on the next successful catalog refresh without editing website files. The manual Featured Resources section and its product-ID list have been removed. Nothing needs to be edited on the website when a product is created, renamed, repriced or removed in Tebex.
 
 Active pages refresh the catalog on a 60-second schedule. Hidden tabs pause polling and check for updates when reopened. Temporary failures retain the last successful catalog with an error message; request backoff respects API rate limits. Search, filtering, scroll position and keyboard focus are retained during refreshes. Product eligibility is checked again when adding to the basket.
 
