@@ -7,7 +7,7 @@ export const config = {
  // Leave empty to detect the GitHub Pages origin and repository path automatically.
  siteUrl: '',
  logo: 'assets/brand/bluepeak-logo.png', hero: 'assets/brand/bluepeak-hero.png',
- discordUrl: 'https://discord.gg/8EbAp7rgbB', youtubeUrl: '', supportUrl: '', supportEmail: '',
+ discordUrl: 'https://discord.gg/8EbAp7rgbB', youtubeUrl: '', supportUrl: '', supportEmail: 'bluepeaksupportofficial@gmail.com',
  docsUrl: 'https://flame101a1.github.io/BLUEPEAK-DEVELOPMENT-DOCS/inventory/',
  bundleId: null,
  // Real category IDs only: {123456: 'Scripts'}. Other categories appear automatically.

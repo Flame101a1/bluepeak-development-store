@@ -27,7 +27,7 @@ The original artwork is already installed unchanged:
 - assets/brand/bluepeak-hero.png
 - assets/brand/bluepeak-logo.png
 
-Missing optional links are hidden. Discord is configured as the available support/community channel; additional support details were deferred by request.
+Missing optional links are hidden. Discord is the preferred support/community channel. The alternative support inbox is bluepeaksupportofficial@gmail.com. Checkout completion returns automatically to #/checkout/complete, which shows the branded thank-you page with receipt and delivery guidance. Canceling checkout returns to the separate basket/cancel flow.
 
 ## Automatic product updates
 
