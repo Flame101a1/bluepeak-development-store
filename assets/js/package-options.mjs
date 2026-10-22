@@ -1,4 +1,4 @@
-import {escapeHTML as e} from './core.mjs';
+import {escapeHTML as e,productKey} from './core.mjs';
 import {external,icons} from './ui.mjs';
 
 export function packageFields(p){
@@ -23,22 +23,20 @@ export function validateVariableData(data){
  if(data.discord_id!==undefined&&typeof data.discord_id!=='string')throw new Error('Discord user IDs must be entered as text.');
  return discordVariableData(data.discord_id);
 }
-export function packageOptionsHTML(p,{formId='purchase-form',prefix='product',discordUrl=''}={}){
+export function packageOptionsHTML(p,{discordUrl='',profile=null}={}){
  const discord=discordField(p),other=packageFields(p).filter(f=>f.type!=='discord_id'&&f.name!=='discord_id');
- return (discord?`<section class="discord-rewards" aria-labelledby="${prefix}-discord-title"><div class="discord-rewards-heading"><span class="value-icon">${icons.chat}</span><div><h3 id="${prefix}-discord-title">Discord role rewards</h3><span>${discord.required?'Required for this resource':'Optional for purchasing'}</span></div></div><p>Add your Discord user ID so Tebex can assign the roles configured for this package after a successful purchase. Join our server with that same account before buying.</p><label for="${prefix}-discord-id">Your Discord user ID</label><input id="${prefix}-discord-id" name="discord_id" form="${e(formId)}" type="text" inputmode="numeric" autocomplete="off" pattern="[1-9][0-9]{16,19}" maxlength="20" placeholder="Paste your numeric user ID" title="Enter your Discord user ID (17–20 digits), not your username" aria-describedby="${prefix}-discord-help" ${discord.required?'required':''}><p id="${prefix}-discord-help" class="discord-field-help">Use your own account’s ID. This identifies the recipient of the roles; it does not sign you in to Discord.</p><details class="discord-id-guide"><summary>Where do I find my Discord ID?</summary><p>In Discord, enable <strong>Developer Mode</strong> under Settings → Advanced. Open your profile’s menu and choose <strong>Copy User ID</strong>, then paste it above.</p></details>${external(discordUrl,'Join our Discord','text-link')}</section>`:'')+(other.length?`<div class="purchase-options-note"><strong>Additional purchase details</strong><p>This resource lists additional options: ${other.map(f=>e(String(f.label||f.description||f.name||'Purchase option').replace(/_/g,' '))).join('; ')}. Follow the product’s instructions and contact support if a required option is unavailable.</p></div>`:'');
+ return (discord?'<section class="discord-rewards"><div class="discord-rewards-heading"><span class="value-icon">'+icons.chat+'</span><div><h3>Discord role rewards</h3><span>'+(discord.required?'Discord connection required':'Optional Discord connection')+'</span></div></div>'+(profile?'<p>Connected as <strong>'+e(profile.name)+'</strong>. Tebex will receive this account’s ID for the package’s configured role rewards.</p><button type="button" class="text-link" data-action="discord-disconnect">Use a different Discord account</button>':'<p>Sign in with Discord to receive the roles configured for this package after purchase. Join our server using the same account.</p><button type="button" class="button secondary" data-action="discord-login" data-id="'+e(productKey(p))+'">Login with Discord '+icons.arrow+'</button>')+external(discordUrl,'Join our Discord','text-link discord-join-link')+'</section>':'')+(other.length?'<div class="purchase-options-note"><strong>Additional purchase details</strong><p>This resource lists additional options: '+other.map(f=>e(String(f.label||f.description||f.name||'Purchase option').replace(/_/g,' '))).join('; ')+'. Follow the product’s instructions and contact support if a required option is unavailable.</p></div>':'');
 }
-
-export function promptDiscordOptions(p,config){
+export function promptDiscordOptions(p){
  return new Promise(resolve=>{
-  const dialog=document.createElement('dialog');dialog.className='package-options-dialog';dialog.setAttribute('aria-labelledby','package-options-title');
-  dialog.innerHTML=`<div class="dialog-top"><h2 id="package-options-title">Before you add this resource</h2><button type="button" class="icon-button" aria-label="Close purchase options">×</button></div><p class="package-options-name">${e(p.name)}</p><form id="package-options-form">${packageOptionsHTML(p,{formId:'package-options-form',prefix:'basket-option',discordUrl:config.discordUrl})}<button class="button" type="submit">Continue to basket ${icons.arrow}</button></form>`;
-  document.body.append(dialog);
-  let result=null;
+  const dialog=document.createElement('dialog');dialog.className='package-options-dialog discord-login-dialog';dialog.setAttribute('aria-labelledby','package-options-title');
+  const required=discordField(p)?.required;
+  dialog.innerHTML='<div class="dialog-top"><h2 id="package-options-title">Adding to your basket</h2><button type="button" class="icon-button" aria-label="Close Discord login">×</button></div><p class="package-options-name">'+e(p.name)+'</p><div class="discord-prompt-symbol">'+icons.chat+'</div><h3>Connect with Discord.</h3><p>Login with Discord so we can identify your account for this package’s role rewards. Your FiveM account stays connected separately.</p><div class="discord-login-actions"><button class="button discord-prompt-login" type="button">Login with Discord '+icons.arrow+'</button>'+(!required?'<button class="button secondary discord-prompt-skip" type="button">Skip login</button>':'')+'</div><p class="discord-login-note">'+(required?'This package requires a Discord connection.':'You can skip Discord login and purchase without Discord role rewards.')+'</p>';
+  document.body.append(dialog);let result=null;
   dialog.addEventListener('close',()=>{dialog.remove();resolve(result)},{once:true});
   dialog.querySelector('.icon-button').addEventListener('click',()=>dialog.close());
-  const form=dialog.querySelector('form'),input=form.elements.namedItem('discord_id');
-  input?.addEventListener('input',()=>input.setCustomValidity(''));
-  form.addEventListener('submit',event=>{event.preventDefault();try{result=discordVariableData(input?.value,discordField(p)?.required);dialog.close()}catch(error){input.setCustomValidity(error.message);input.reportValidity()}});
+  dialog.querySelector('.discord-prompt-login').addEventListener('click',()=>{result='login';dialog.close()});
+  dialog.querySelector('.discord-prompt-skip')?.addEventListener('click',()=>{result='skip';dialog.close()});
   dialog.showModal();
  });
 }

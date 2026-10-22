@@ -1,4 +1,4 @@
-import {policies} from './policies.js?v=20261022-discord-rewards';
+import {policies} from './policies.js?v=20261022-discord-login';
 // This file is PUBLIC. Only the Tebex HEADLESS PUBLIC token belongs here.
 // Never paste a Checkout API key, webhook secret, password, or other private credential.
 export const config = {
@@ -7,6 +7,8 @@ export const config = {
  // Optional absolute deployed site URL, including repository path and trailing slash.
  // Leave empty to detect the GitHub Pages origin and repository path automatically.
  siteUrl: '',
+ // Public Discord Application ID; no client secret or bot token belongs here.
+ discordClientId: '1562955299302670406',
  logo: 'assets/brand/bluepeak-logo.png', hero: 'assets/brand/bluepeak-hero.png',
  discordUrl: 'https://discord.gg/8EbAp7rgbB', youtubeUrl: '', supportUrl: '', supportEmail: 'bluepeaksupportofficial@gmail.com',
  docsUrl: 'https://flame101a1.github.io/BLUEPEAK-DEVELOPMENT-DOCS/inventory/',

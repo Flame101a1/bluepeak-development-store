@@ -19,8 +19,8 @@ test('Discord IDs remain precise strings and optional omissions are allowed',()=
 test('customer-facing options show clear role instructions instead of raw metadata',()=>{
  const html=packageOptionsHTML(product,{discordUrl:'https://discord.gg/example'});
  assert.ok(html.includes('Discord role rewards'));
- assert.ok(html.includes('Optional for purchasing'));
- assert.ok(html.includes('name="discord_id" form="purchase-form"'));
+ assert.ok(html.includes('Optional Discord connection'));
+ assert.ok(html.includes('Login with Discord'));assert.ok(!html.includes('<input'));
  assert.ok(!html.includes('"required":false'));
  assert.ok(!html.includes('JSON'));
  assert.ok(packageOptionsHTML({options:[{name:'<script>attack</script>'}]}).includes('&lt;script&gt;'));

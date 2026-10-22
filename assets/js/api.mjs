@@ -1,6 +1,6 @@
-import {validateVariableData} from './package-options.mjs';
+import {validateVariableData} from './package-options.mjs?v=20261022-discord-login';
 import {checkoutReturnURL} from './checkout-return.mjs';
-import {authReturnURL} from './auth.mjs';
+import {authReturnURL} from './auth.mjs?v=20261022-discord-login';
 import {API,unwrap,readBasket,basketPath,packagePath} from './core.mjs';
 export class ApiError extends Error {
  constructor(message,status=0,retryAt=0){super(message);this.name='ApiError';this.status=status;this.retryAt=retryAt}
@@ -21,7 +21,10 @@ export class TebexAPI {
    if(!response.ok){
     if(response.status===429||response.status===503){const retry=response.headers?.get('retry-after');const seconds=Number(retry);const retryAt=retry?(Number.isFinite(seconds)?Date.now()+Math.max(seconds,1)*1000:Date.parse(retry)):0;this.cooldownUntil=Math.max(this.cooldownUntil,Number.isFinite(retryAt)&&retryAt>Date.now()?retryAt:Date.now()+60000)}
     const messages={400:'Tebex could not accept this package or option.',401:'Tebex could not authorize this request.',403:'This resource is not available for your account.',404:'This basket or resource is no longer available.',410:'This basket or resource has expired.',422:'Tebex could not accept this change. Check your account, package eligibility, or code.',429:'Too many requests. Please wait a moment and try again.'};
-    throw new ApiError(messages[response.status]||'Tebex is temporarily unavailable. Please try again.',response.status,this.cooldownUntil);
+    const detail=[400,422].includes(response.status)&&typeof json?.detail==='string'?json.detail.replace(/[\x00-\x1f\x7f]/g,' ').trim().slice(0,300):'';
+    const error=new ApiError(detail?'Tebex: '+detail:messages[response.status]||'Tebex is temporarily unavailable. Please try again.',response.status,this.cooldownUntil);
+    error.loginRequired=detail==='User must login before adding packages to basket';
+    throw error;
    }
    return unwrap(json);
   }catch(error){if(error instanceof ApiError)throw error;throw new ApiError('Unable to reach Tebex. Check your connection and try again.')}
