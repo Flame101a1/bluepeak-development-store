@@ -1,4 +1,4 @@
-import {productGallery,selectGallery,stepGallery,expandGallery} from './gallery.mjs?v=20261031-lightbox';
+import {productGallery,selectGallery,stepGallery,expandGallery} from './gallery.mjs?v=20261031-gallery-polish';
 import {beginDiscordLogin,discordProfile,disconnectDiscord,takeDiscordResume} from './discord-oauth.mjs';
 import {discordField,discordVariableData,packageOptionsHTML,promptDiscordOptions} from './package-options.mjs?v=20261022-discord-login';
 import {supportPage} from './support.mjs?v=20261022-response-times';
