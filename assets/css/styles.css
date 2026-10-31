@@ -337,3 +337,5 @@ body{background-image:radial-gradient(ellipse at 80% 10%,#073b642e,transparent 3
 .discord-login-actions>.button{flex:1}
 .discord-login-dialog>.discord-login-note{font-size:10px!important;margin:0}
 @media(max-width:420px){.discord-login-actions{flex-direction:column}}
+
+.gallery-stage{position:relative;outline-offset:4px;border-radius:12px}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #4d7996;background:#071321dc;color:#fff;border-radius:50%;cursor:pointer;box-shadow:0 3px 16px #0005;z-index:1}.gallery-previous{left:12px}.gallery-next{right:12px}.gallery-previous svg{transform:rotate(180deg)}.gallery-arrow svg{width:20px;height:20px}.gallery-arrow:hover{background:#00bfff;color:#04111d;border-color:#00bfff}.gallery-arrow:focus-visible{outline:2px solid #00bfff;outline-offset:3px}@media(max-width:480px){.gallery-previous{left:8px}.gallery-next{right:8px}}
