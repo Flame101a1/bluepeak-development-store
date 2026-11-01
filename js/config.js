@@ -11,7 +11,7 @@ export const config = {
  discordClientId: '1562955299302670406',
  logo: 'assets/brand/bluepeak-logo.png', hero: 'assets/brand/bluepeak-hero.png',
  discordUrl: 'https://discord.gg/aw98498EBq', youtubeUrl: '', supportUrl: '', supportEmail: 'bluepeaksupportofficial@gmail.com',
- docsUrl: 'https://flame101a1.github.io/BLUEPEAK-DEVELOPMENT-DOCS/inventory/',
+ docsUrl: 'https://flame101a1.github.io/BLUEPEAK-DEVELOPMENT-DOCS/',
  bundleId: null,
  // Real category IDs only: {123456: 'Scripts'}. Other categories appear automatically.
  categoryLabels: {},

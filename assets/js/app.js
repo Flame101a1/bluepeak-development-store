@@ -7,7 +7,7 @@ import {faqPage,filterFAQ} from './faq.mjs';
 import {aboutPage} from './about.mjs';
 import {shareURL} from './sharing.mjs';
 import {displayCurrency,price} from './currency.mjs';
-import {config} from '../../js/config.js?v=20261101-discord-header';
+import {config} from '../../js/config.js?v=20261101-docs-home';
 import {TebexAPI} from './api.mjs?v=20261022-discord-login';
 import {isAuthReturn,authContext} from './auth.mjs?v=20261022-discord-login';
 import {launchCheckout,checkoutDestination} from './checkout.mjs';
