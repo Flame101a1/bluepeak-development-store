@@ -1,4 +1,4 @@
-import {config} from '../../js/config.js?v=20261022-discord-login';
+import {config} from '../../js/config.js?v=20261101-discord-header';
 import {finishDiscordLogin} from './discord-oauth.mjs';
 const returned=location.href;
 const base=new URL('./',location.href);base.search='';base.hash='';

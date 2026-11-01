@@ -10,7 +10,7 @@ export const config = {
  // Public Discord Application ID; no client secret or bot token belongs here.
  discordClientId: '1562955299302670406',
  logo: 'assets/brand/bluepeak-logo.png', hero: 'assets/brand/bluepeak-hero.png',
- discordUrl: 'https://discord.gg/8EbAp7rgbB', youtubeUrl: '', supportUrl: '', supportEmail: 'bluepeaksupportofficial@gmail.com',
+ discordUrl: 'https://discord.gg/aw98498EBq', youtubeUrl: '', supportUrl: '', supportEmail: 'bluepeaksupportofficial@gmail.com',
  docsUrl: 'https://flame101a1.github.io/BLUEPEAK-DEVELOPMENT-DOCS/inventory/',
  bundleId: null,
  // Real category IDs only: {123456: 'Scripts'}. Other categories appear automatically.
