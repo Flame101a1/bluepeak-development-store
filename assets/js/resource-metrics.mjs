@@ -1,0 +1,18 @@
+import {escapeHTML as e} from './core.mjs';
+import {icons} from './ui.mjs';
+export const METRICS_SOURCE='https://5metrics.dev';
+export function metricName(value){return String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+export function productMetricNames(product){const title=String(product?.name||'');return [...new Set([title,title.split('|')[0]].flatMap(name=>[name,name.replace(/\[(?:qbcore|esx|qbox|standalone|fivem)\]/gi,'')]).map(metricName).filter(Boolean))]}
+export function validMetric(row){return row&&typeof row.name==='string'&&/^[a-zA-Z0-9_.-]{1,128}$/.test(row.name)&&Number.isSafeInteger(row.servers)&&row.servers>=0&&Number.isSafeInteger(row.players)&&row.players>=0}
+export function matchResourceMetric(product,resources){const names=productMetricNames(product),matches=(Array.isArray(resources)?resources:[]).filter(validMetric).filter(r=>names.includes(metricName(r.name)));return matches.length===1?matches[0]:null}
+export function resourceMetricsHTML(product,snapshot){
+ const row=matchResourceMetric(product,snapshot?.resources),date=Date.parse(snapshot?.checkedAt),stale=!Number.isFinite(date)||Date.now()-date>7200000;
+ const url=row?METRICS_SOURCE+'/resource/'+encodeURIComponent(row.name):METRICS_SOURCE+'/resources?search='+encodeURIComponent(String(product?.name||'').split('|')[0].trim());
+ const format=n=>new Intl.NumberFormat('en').format(n),checked=Number.isFinite(date)?new Date(date).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'}):'';
+ return '<section class="resource-metrics" aria-label="Resource usage"><div class="metrics-heading"><h3>'+icons.bolt+'Live usage</h3><span class="metrics-status '+(row&&!stale?'is-current':'')+'"><i></i>'+(row?(stale?'Last known report':'Latest report'):snapshot?.unavailable?'Unavailable':'Not tracked yet')+'</span></div><div class="metrics-values"><div><strong>'+(row?format(row.servers):'—')+'</strong><span>Servers · 24h</span></div><div><strong>'+(row?format(row.players):'—')+'</strong><span>Players reported</span></div></div><p class="metrics-explanation">'+(row?'Counts reported by 5Metrics across the servers it tracks.':snapshot?.unavailable?'Usage data is temporarily unavailable.':'No unique resource-name match is currently available on 5Metrics.')+'</p><div class="metrics-footer"><a href="'+e(url)+'" target="_blank" rel="noopener noreferrer">Powered by 5Metrics '+icons.arrow+'</a><span>'+(checked?'Checked '+e(checked):'Awaiting report')+'</span></div><p class="metrics-refresh">Updates about every 30 minutes.'+(row&&stale?' This report is older than expected.':'')+'</p></section>';
+}
+let cached=null,loadedAt=0;
+export async function loadResourceMetrics(base,{fetcher=(...args)=>globalThis.fetch(...args),now=Date.now()}={}){
+ if(cached&&now-loadedAt<300000)return cached;
+ try{const r=await fetcher(new URL('assets/data/resource-metrics.json',base),{credentials:'omit',cache:'no-store',signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error();const data=await r.json();if(data.version!==1||!Number.isFinite(Date.parse(data.checkedAt))||!Array.isArray(data.resources)||!data.resources.every(validMetric))throw Error();cached={version:1,checkedAt:data.checkedAt,resources:data.resources,...(data.unavailable===true?{unavailable:true}:{})};loadedAt=now;return cached}catch{loadedAt=now;cached=cached||{unavailable:true,resources:[]};return cached}
+}

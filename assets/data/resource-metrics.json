@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-03T19:19:19.383Z",
+  "resources": [
+    {
+      "name": "bluepeak-npcai",
+      "servers": 1,
+      "players": 1
+    },
+    {
+      "name": "bluepeak-propertymaintenance",
+      "servers": 1,
+      "players": 1
+    }
+  ]
+}
