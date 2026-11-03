@@ -1,4 +1,4 @@
-import {config} from '../../js/config.js?v=20261101-docs-home';
+import {config} from '../../js/config.js?v=20261103-owner-tracking';
 import {finishDiscordLogin} from './discord-oauth.mjs';
 const returned=location.href;
 const base=new URL('./',location.href);base.search='';base.hash='';

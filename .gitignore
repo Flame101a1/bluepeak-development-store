@@ -4,3 +4,7 @@ Thumbs.db
 release/
 
 _site/
+.wrangler/
+node_modules/
+.dev.vars*
+.env*
