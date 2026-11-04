@@ -27,8 +27,6 @@ jobs:
         run: node --test tests/*.test.mjs
       - name: Fetch current public Tebex catalog and generate previews
         run: node scripts/sync-previews.mjs
-      - name: Refresh public resource usage from 5Metrics
-        run: node scripts/sync-metrics.mjs
       - name: Stage static website
         run: node scripts/stage-pages.mjs
       - uses: actions/configure-pages@v5

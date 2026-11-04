@@ -9,8 +9,6 @@ export const config = {
  siteUrl: '',
  // Public Discord Application ID; no client secret or bot token belongs here.
  discordClientId: '1562955299302670406',
- // Public URL of the free owner-verification service. Blank keeps editing off.
- trackingEndpoint: 'https://bluepeak-resource-tracking.noahthornton53.workers.dev',
  logo: 'assets/brand/bluepeak-logo.png', hero: 'assets/brand/bluepeak-hero.png',
  discordUrl: 'https://discord.gg/aw98498EBq', youtubeUrl: '', supportUrl: '', supportEmail: 'bluepeaksupportofficial@gmail.com',
  docsUrl: 'https://flame101a1.github.io/BLUEPEAK-DEVELOPMENT-DOCS/',
